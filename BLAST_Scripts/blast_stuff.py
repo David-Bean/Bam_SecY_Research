@@ -4,13 +4,17 @@ from Bio import SeqIO
 from Bio import SearchIO
 from Bio import AlignIO # <--Like SeqIO but for aligned files I guess
 
-
+'''
+Enterobacterales NCBI taxid: 91347
+'''
 
 '''
 Takes a fasta file as input, runs protein-protein BLAST for the first sequence in the file
 saves results as blastrsults.xml "blastq"
 
+http://biopython.org/DIST/docs/tutorial/Tutorial.html#sec123
 https://biopython.org/docs/1.75/api/Bio.Blast.NCBIWWW.html
+https://www.reddit.com/r/bioinformatics/comments/4ef5p8/how_to_filter_blast_results_using_biopython/
 This is basically all the documentation for blastq I've been able to find so far
 
 Should maybe a way to filter only one per species?
@@ -23,13 +27,14 @@ def prot_blast(input_file,evalue):
 
 	result_handle = NCBIWWW.qblast(
 		program = 'blastp',
-		database = 'swissprot', # <--- Trying different databases. Next i'm trying uniprot (swissprot)
+		database = 'nr', # <--- Trying different databases. Next i'm trying uniprot (swissprot)
 		sequence = input_seq.seq,
 		expect = evalue,
 		short_query = False,
-		hitlist_size = 200,
-		filter = None
+		hitlist_size = 10,
+		filter = 91347
 		)
+
 	blast_xml = result_handle.read()
 
 	with open('BlastResults.xml','w') as save_file:
