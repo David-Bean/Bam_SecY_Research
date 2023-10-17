@@ -3,7 +3,7 @@
 library(ggplot2)
 library(readr)
 
-working_dir <- "C:/Users/david/OneDrive/Desktop/BAM Research/PythonScripts/R_Histograms/stats_csv"
+working_dir <- "stats_csv"
 file_name <- "enterobacterales_stats.csv"
 conserved_value <- 98
 
@@ -27,5 +27,4 @@ ggsave(filename = pic_name,
        width = 20, height = 4, dpi = 150, units = "in",device = "png",
        limitsize = FALSE)
 
-g
 
